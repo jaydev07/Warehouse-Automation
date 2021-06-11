@@ -2,7 +2,7 @@
 Automating a warehouse using Robotics Operating System. Created in EYRC competition of IIT Bombay.
 
 - This project is on the theme of "Vargi Bots" of "e-Yantra Robotics Competition".
-- There are 2 Robotic arms who are supposed to pick the packages according to the incoming orders and thrie priorities.
+- There are 2 Robotic arms who are supposed to pick the packages according to the incoming orders and their priorities.
 - User is informed when his order is been delivered & shipped via email.
 - A Dashboard is been maintained which contains information about packages & their status.
 
