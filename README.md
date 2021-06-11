@@ -1,4 +1,4 @@
-# Ware-House-Management
+# Warehouse Automation
 Automating a warehouse using Robotics Operating System. Created for EYRC competition of IIT Bombay.
 
 - There are 2 Robotic arms who are supposed to pick the packages according to the incoming orders and thrie priorities.
