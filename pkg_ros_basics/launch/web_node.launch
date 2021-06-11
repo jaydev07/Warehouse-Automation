@@ -1,0 +1,10 @@
+<launch>
+    
+    <node pkg="pkg_ros_basics" type="webpage_launch.sh" name="webpage_launch" output="screen">
+        <param name="cmd" value="$(find pkg_ros_basics)/launch/webpage_launch.sh"/>
+    </node>
+        
+    <node pkg="pkg_ros_basics" type="node_hello_ros.py" name="node_hello_ros" output="screen"/>
+
+</launch>
+

@@ -1,0 +1,40 @@
+<launch>
+    
+    <!-- Spawn Task-2 Models in Gazebo -->
+    <include file="$(find pkg_vb_sim)/launch/task2_world.launch" />
+
+    <include file = "$(find pkg_vb_sim)/launch/gazebo_spawn_ur5_1.launch" >
+        <arg name="arg_x" value="0.04" />
+        <arg name="arg_y" value="0.76" />
+        <arg name="arg_z" value="0.05" />
+        <arg name="arg_R" value="0.0" />
+        <arg name="arg_P" value="0.0" />
+        <arg name="arg_Y" value="3.14" />
+    </include>
+    
+    <!-- Launch Moveit move_group Node -->
+    <include file = "$(find pkg_moveit_ur5_1)/launch/move_group.launch" /> 
+
+    <!-- Run RViz with Moveit! Plugin -->
+    <arg name="use_rviz" default="true" />
+
+    <include file="$(find pkg_moveit_ur5_1)/launch/moveit_rviz.launch" if="$(arg use_rviz)">
+        <arg name="rviz_config" value="$(find pkg_moveit_ur5_1)/launch/moveit.rviz"/>
+    </include>
+ 
+    <!-- Add Shelf to Moveit! Planning Scene in RViz -->
+    <arg name="scene_file" default="$(find pkg_task2)/config/rviz/ur5_1_shelf.scene"/> 
+    <node name = "moveit_publish_scene_from_text" pkg= "moveit_ros_planning" type = "moveit_publish_scene_from_text" args= "$(arg scene_file)"/>
+
+    <!-- Run Task-2 Pick Place ROS Node -->
+    <node name= "node_t2_ur5_1_pick_place" pkg= "pkg_task2" type="node_t2_ur5_1_pick_place.py" output="screen"/>
+
+    <arg name="record" default="false"/>
+    <arg name="rec_name" default="task2.bag"/>
+
+    <group if="$(arg record)">
+        <node name="rosbag_record_pick" pkg="rosbag" type="record"
+         args="record -O $(find pkg_task2)/bag_files/$(arg rec_name) --chunksize=10 /eyrc/vb/ur5_1/vacuum_gripper/logical_camera/ur5_1" output="screen"/>
+    </group>
+
+</launch>

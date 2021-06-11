@@ -1,0 +1,12 @@
+# goal
+string protocol
+string mode
+string topic
+string message
+---
+# result
+bool flag_success
+---
+# feedback
+int8 percentage_complete
+

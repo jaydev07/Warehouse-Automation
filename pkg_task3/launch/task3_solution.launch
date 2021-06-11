@@ -1,0 +1,31 @@
+<launch>
+
+    <!-- Run RViz with Moveit! Pluging -->
+    <arg name="use_rviz" default="true" />
+
+    <include file="$(find pkg_moveit_ur5_1)/launch/moveit_rviz.launch" if="$(arg use_rviz)">
+        <arg name="rviz_config" value="$(find pkg_moveit_ur5_1)/launch/moveit.rviz"/>
+    </include> 
+
+    <!-- Launch Moveit Group Node -->
+    <include file = "$(find pkg_moveit_ur5_1)/launch/move_group.launch" />     
+
+    <!-- Launch Task-3 Simulation Environment in Gazebo -->
+    <include file="$(find pkg_vb_sim)/launch/task3_simulation.launch" />
+
+    <!-- This node is for .....  -->
+    <!-- It is also .....  -->
+    <node name= "node_t3" pkg= "pkg_task3" type="node_t3.py" output="screen"/>
+
+    <!-- Recording Bag File for Submission -->
+    <arg name="record" default="false"/>
+    <arg name="rec_name" default="t3.bag"/>
+
+    <group if="$(arg record)">
+        <node name="rosbag_record_pick" pkg="rosbag" type="record"
+       args="record -O $(find pkg_task3)/bag_files/$(arg rec_name) --chunksize=10 /eyrc/vb/ur5_1/vacuum_gripper/logical_camera/ur5_1" output="screen"/>
+    </group>
+
+    
+</launch>
+

@@ -1,0 +1,14 @@
+# goal
+string protocol
+string mode
+string topic
+string turtle_x
+string turtle_y
+string turtle_theta
+---
+# result
+bool flag_success
+---
+# feedback
+int8 percentage_complete
+

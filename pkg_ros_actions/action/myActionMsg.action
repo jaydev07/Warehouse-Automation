@@ -1,0 +1,14 @@
+# goal
+int8 distance
+int8 angle
+---
+# result
+int8 final_x
+int8 final_y
+int8 final_theta
+---
+# feedback
+int8 cur_x
+int8 cur_y
+int8 cur_theta
+

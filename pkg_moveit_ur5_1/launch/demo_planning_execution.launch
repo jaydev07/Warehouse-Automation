@@ -1,0 +1,26 @@
+<launch>
+
+  <rosparam command="load" file="$(find pkg_moveit_ur5_1)/config/joint_names.yaml"/>
+
+  <include file="$(find pkg_vb_sim)/launch/gazebo_ur5_1.launch"/>
+
+  <include file="$(find pkg_moveit_ur5_1)/launch/planning_context.launch" >
+    <arg name="load_robot_description" value="true" />
+  </include>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="/use_gui" value="false"/>
+    <rosparam param="/source_list">[/joint_states]</rosparam>
+  </node>
+
+  <include file="$(find pkg_moveit_ur5_1)/launch/move_group.launch">
+    <arg name="publish_monitored_planning_scene" value="true" />
+  </include>
+
+  <arg name="use_rviz" default="true" />
+
+  <include file="$(find pkg_moveit_ur5_1)/launch/moveit_rviz.launch" if="$(arg use_rviz)">
+  <arg name="rviz_config" value="$(find pkg_moveit_ur5_1)/launch/moveit.rviz"/>
+  </include>
+
+</launch>
